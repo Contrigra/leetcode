@@ -83,30 +83,3 @@ print(format_duration(120) == '2 minutes')
 print(format_duration(3600) == '1 hour')
 print(format_duration(3662) == '1 hour, 1 minute and 2 seconds')
 
-times = [("year", 365 * 24 * 60 * 60),
-         ("day", 24 * 60 * 60),
-         ("hour", 60 * 60),
-         ("minute", 60),
-         ("second", 1)]
-
-def format_duration(seconds):
-
-    if not seconds:
-        return "now"
-
-    chunks = []
-    for name, secs in times:
-        qty = seconds // secs
-        if qty:
-            if qty > 1:
-                name += "s"
-            chunks.append(str(qty) + " " + name)
-
-        seconds = seconds % secs
-
-    return ', '.join(chunks[:-1]) + ' and ' + chunks[-1] if len(chunks) > 1 else chunks[0]
-
-print(format_duration(
-    (31536000 * 7) + (
-                86400 * 246) + 54000 + 54 + 1920) == '7 years, 246 days, 15 hours, 32 minutes and 54 seconds')
-
